@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniDownloader - Universal Video & Audio Downloader</title>
+    <meta name="description"
+        content="Download high-quality video and audio from YouTube, TikTok, Instagram, Facebook, and Twitter. Free, fast, and secure.">
+    <meta property="og:title" content="UniDownloader - Universal Video & Audio Downloader">
+    <meta property="og:description"
+        content="Paste any video link and instantly download video or audio in multiple formats.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark-mode">
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>UniDownloader</span>
+            </div>
+            <nav class="nav-right">
+                <span id="status-indicator" class="status-dot" title="Server Online"></span>
+                <button id="theme-toggle" title="Toggle Theme" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Free · Fast · No Signup Required</span>
+                </div>
+                <h1>Universal Video &amp;<br>Audio Downloader</h1>
+                <p class="hero-subtitle">Paste any video link from YouTube, TikTok, Instagram, Facebook, or Twitter and
+                    download in the quality you want.</p>
+
+                <!-- Input Area -->
+                <div class="input-card">
+                    <div class="input-wrapper">
+                        <i class="fas fa-link link-icon"></i>
+                        <input type="url" id="url-input" placeholder="https://www.youtube.com/watch?v=..."
+                            autocomplete="off" spellcheck="false">
+                        <button id="clear-btn" class="icon-btn" title="Clear input" aria-label="Clear URL">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="action-row">
+                        <button id="fetch-btn" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                            <span>Fetch Video</span>
+                        </button>
+                        <button id="paste-btn" class="btn btn-secondary">
+                            <i class="fas fa-paste"></i>
+                            <span>Paste</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading" class="loading-state hidden">
+                    <div class="spinner-ring"></div>
+                    <p>Fetching video info<span class="dots"></span></p>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-box" class="error-box hidden">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="error-text">Something went wrong.</span>
+                    <button id="dismiss-error" class="icon-btn-sm" aria-label="Dismiss error"><i
+                            class="fas fa-times"></i></button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="result-section" class="hidden">
+                <div class="result-card glass-card">
+
+                    <!-- Thumbnail -->
+                    <div class="thumb-col">
+                        <div class="thumb-wrapper">
+                            <img id="video-thumb" src="" alt="Video thumbnail">
+                            <div class="thumb-overlays">
+                                <span id="platform-badge" class="badge badge-platform">YouTube</span>
+                                <span id="duration-badge" class="badge badge-duration">0:00</span>
+                            </div>
+                        </div>
+                        <!-- Video Meta -->
+                        <div class="video-meta">
+                            <h2 id="video-title">Loading...</h2>
+                            <div class="meta-row">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="video-uploader">Uploader</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formats Column -->
+                    <div class="formats-col">
+
+                        <!-- Tabs -->
+                        <div class="tab-bar" role="tablist">
+                            <button class="tab active" data-tab="video" role="tab" aria-selected="true">
+                                <i class="fas fa-film"></i> Video
+                            </button>
+                            <button class="tab" data-tab="audio" role="tab" aria-selected="false">
+                                <i class="fas fa-music"></i> Audio
+                            </button>
+                        </div>
+
+                        <!-- Video Formats -->
+                        <div class="tab-pane active" id="video-pane" role="tabpanel">
+                            <div class="formats-grid" id="video-formats"></div>
+                        </div>
+
+                        <!-- Audio Formats -->
+                        <div class="tab-pane" id="audio-pane" role="tabpanel">
+                            <div class="formats-grid" id="audio-formats"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Platform Support -->
+            <section class="platforms-section">
+                <p class="section-label">Supported Platforms</p>
+                <div class="platforms-grid">
+                    <div class="platform-chip">
+                        <i class="fab fa-youtube" style="color:#ff0000"></i>
+                        <span>YouTube</span>
+                    </div>
+                    <div class="platform-chip">
+                        <i class="fab fa-tiktok" style="color:#69c9d0"></i>
+                        <span>TikTok</span>
+                    </div>
+                    <div class="platform-chip">
+                        <i class="fab fa-instagram" style="color:#e1306c"></i>
+                        <span>Instagram</span>
+                    </div>
+                    <div class="platform-chip">
+                        <i class="fab fa-facebook" style="color:#1877f2"></i>
+                        <span>Facebook</span>
+                    </div>
+                    <div class="platform-chip">
+                        <i class="fab fa-twitter" style="color:#1da1f2"></i>
+                        <span>Twitter/X</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="features-grid">
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Lightning Fast</h3>
+                        <p>Powered by yt-dlp for the fastest and most reliable extraction.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-lock"></i>
+                        <h3>Safe &amp; Secure</h3>
+                        <p>Rate limiting and input validation protect every request.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Multiple Formats</h3>
+                        <p>Video in various resolutions and audio in multiple bitrates.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Mobile Ready</h3>
+                        <p>Fully responsive — works perfectly on any screen size.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Download notification -->
+    <div id="dl-toast" class="toast hidden">
+        <i class="fas fa-check-circle"></i>
+        <span>Download started!</span>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 UniDownloader &mdash; For personal use only. Respect copyright laws.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
